@@ -7,10 +7,8 @@ export default async function handler (req, res) {
         const tasks = await prisma.task.findMany();
         res.json(tasks);
     }
-
-    if (req.method === 'POST') {
-        const { title, description } = req.body;
-
+    else if (req.method === 'POST') {
+        const { title, description } = JSON.parse(req.body);
         const newTask = await prisma.task.create({
             data: {
                 title,
